@@ -1,0 +1,16 @@
+{
+    "name": "sergiovilar/laravel-crud",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergio Vilar",
+            "email": "sergiovilar.r@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+  		"classmap": [
+        "src"
+      ]
+    }
+}
