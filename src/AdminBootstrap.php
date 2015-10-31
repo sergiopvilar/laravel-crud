@@ -10,7 +10,7 @@ class AdminBootstrap {
 
   public function __construct($path) {
 
-    $folder = realpath(__DIR__.'/../../../'.$path);
+    $folder = realpath(__DIR__.'/../../../../'.$path);
     foreach (glob($folder . "/*.php") as $file) {
       require_once($file);
     }
