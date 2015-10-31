@@ -7,9 +7,8 @@
             "email": "sergiovilar.r@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "sergiovilar/laravel-smartform": "dev-master"
+        "sergiovilar/laravel-smartform": "^0.1.0"
     },
     "autoload": {
   		"classmap": [
