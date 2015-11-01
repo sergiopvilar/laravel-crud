@@ -6,6 +6,8 @@
  * Time: 2:16 AM
  */
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -19,7 +21,7 @@ class CRUDController extends \App\Http\Controllers\Controller {
   }
 
   private function getAdmin($name) {
-    return Admin::getByPath($name);
+    return \Admin::getByPath($name);
   }
 
   public function index(Request $request) {
