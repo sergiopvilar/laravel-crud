@@ -1,6 +1,6 @@
 # laravel-crud
 
-Create CRUDs (Create, Read, Update, Delete) for your models in Laravel 5.
+Create CRUDs (Create, Read, Update, Delete) for your models in Laravel 5 and Lumen.
 
 ## Installation
 
