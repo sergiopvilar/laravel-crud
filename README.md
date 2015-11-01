@@ -12,6 +12,8 @@ Add this line to the `bootstrap/app.php` file before the `return $app;`:
 
     new AdminBootstrap('/app/Admin');
 
+*Note:* In Lumen framework you should put this piece of code above before the `$app->group(['namespace' => 'App\Http\Controllers'])`.
+
 `/app/Admin` should be the folder where you'll put the CRUDs specification.
 
 Add this line to your `app/http/routes.php` file:
