@@ -8,19 +8,31 @@ Install via composer:
 
     composer require sergiovilar/laravel-crud
 
+Copy the contents of the `views` folder to `resources/views`.
+
+### Laravel 5
+
 Add this line to the `bootstrap/app.php` file before the `return $app;`:
 
     new AdminBootstrap('/app/Admin');
 
 `/app/Admin` should be the folder where you'll put the CRUDs specification.
 
-**Note:** In Lumen framework you should put this piece of code above before the `$app->group(['namespace' => 'App\Http\Controllers'])`.
-
 Add this line to your `app/http/routes.php` file:
 
     Admin::routes();
 
-Copy the contents of the `views` folder to `resources/views`.
+### Lumen
+
+Add this line to the `bootstrap/app.php` file before the line containing `$app->group(['namespace' => 'App\Http\Controllers'])`:
+
+    new AdminBootstrap('/app/Admin', $app);
+
+`/app/Admin` should be the folder where you'll put the CRUDs specification.
+
+Add this line to your `app/http/routes.php` file:
+
+    Admin::routes($app);
 
 ## Usage
 
