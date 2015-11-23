@@ -12,7 +12,7 @@ class FormItem {
   private static $instance;
 
   public static function __callStatic($name, $arguments) {
-    $default = (!empty($arguments[2])) ? $arguments[2] : false;
+    $default = (!empty($arguments[2])) ? $arguments[2] : null;
     self::getInstance()->_add($name, $arguments[0], $arguments[1], $default);
   }
 
