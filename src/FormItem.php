@@ -12,7 +12,8 @@ class FormItem {
   private static $instance;
 
   public static function __callStatic($name, $arguments) {
-    self::getInstance()->_add($name, $arguments[0], $arguments[1]);
+    $default = (!empty($arguments[2])) ? $arguments[2] : false;
+    self::getInstance()->_add($name, $arguments[0], $arguments[1], $default);
   }
 
   private function __construct() {
@@ -32,8 +33,8 @@ class FormItem {
     return self::getInstance()->fields;
   }
 
-  private function _add($type, $name, $label) {
-    $this->fields[$name] = [$label, $type];
+  private function _add($type, $name, $label, $default) {
+    $this->fields[$name] = [$label, $type, $default];
   }
 
   private function set($fields) {
