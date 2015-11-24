@@ -13,6 +13,7 @@ class AdminItem {
   public $column = [];
   public $form = [];
   public $middleware = [];
+  public $storage = 'local';
 
   public function __construct($model) {
     $this->model = $model;
@@ -21,6 +22,10 @@ class AdminItem {
   public function middleware($mid) {
     $this->middleware = $mid;
     return $this;
+  }
+
+  public function storage($storage) {
+    $this->storage = $storage;
   }
 
   public function title($title) {

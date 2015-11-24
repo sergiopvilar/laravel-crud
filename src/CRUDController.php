@@ -114,7 +114,7 @@ class CRUDController extends \App\Http\Controllers\Controller {
           $file = $request->file($key);
           if(!empty($file) && $file->isValid()) {
             $extension = $file->getClientOriginalExtension();
-            Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
+            Storage::disk($admin->storage)->put($file->getFilename().'.'.$extension,  File::get($file));
             $input = $file->getFilename().'.'.$extension;
           }
           break;
