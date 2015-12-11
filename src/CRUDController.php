@@ -28,8 +28,9 @@ class CRUDController extends \App\Http\Controllers\Controller {
 
     $cl = $this->getClassName($request);
     $cll = strtolower($cl);
-    $data = call_user_func($cl.'::all');
     $admin = $this->getAdmin($cl);
+    $data = ($admin->grid_data) ?
+      call_user_func($admin->grid_data) : call_user_func($cl.'::all');
 
     if(empty($admin->column)) {
       $cols = array_keys($admin->form);
@@ -54,10 +55,12 @@ class CRUDController extends \App\Http\Controllers\Controller {
     $cl = $this->getClassName($request);
     $cll = strtolower($cl);
     $admin = $this->getAdmin($cl);
+    $form = ($admin->before_form)
+      ? call_user_func_array($admin->before_form, [$admin->form]) : $admin->form;
     return view('crud.create')
       ->with('route', $cll)
       ->with('method', 'post')
-      ->with('fields', $admin->form)
+      ->with('fields', $form)
       ->with('name', $admin->title);
   }
 
@@ -67,10 +70,12 @@ class CRUDController extends \App\Http\Controllers\Controller {
     $admin = $this->getAdmin($cl);
     $data = call_user_func_array($cl.'::find', [$id]);
     $fields = [];
-    foreach($admin->form as $key => $value) {
+    $form = ($admin->before_form)
+      ? call_user_func_array($admin->before_form, [$admin->form]) : $admin->form;
+    foreach($form as $key => $value) {
       array_push($value, $data->{$key});
       $fields[$key] = $value;
-    }
+    }    
 
     return view('crud.create')
       ->with('route', $cll.'/'.$data->id)
@@ -85,6 +90,8 @@ class CRUDController extends \App\Http\Controllers\Controller {
     $cll = strtolower($cl);
     $admin = $this->getAdmin($cl);
     $item = $this->fillObject($admin, $request, new $cl());
+    if($admin->before_save)
+      $item = call_user_func_array($admin->before_save, [$request, $item]);
     $item->save();
     return redirect('/admin/'.$cll);
 
@@ -97,6 +104,8 @@ class CRUDController extends \App\Http\Controllers\Controller {
     $admin = $this->getAdmin($cl);
     $item = call_user_func_array($cl.'::find', [$id]);
     $item = $this->fillObject($admin, $request, $item);
+    if($admin->before_save)
+      $item = call_user_func_array($admin->before_save, [$request, $item]);
     $item->save();
     return redirect('/admin/'.$cll);
 

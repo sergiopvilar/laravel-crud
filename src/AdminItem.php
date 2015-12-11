@@ -14,6 +14,9 @@ class AdminItem {
   public $form = [];
   public $middleware = [];
   public $storage = 'local';
+  public $grid_data = false;
+  public $before_save = false;
+  public $before_form = false;
 
   public function __construct($model) {
     $this->model = $model;
@@ -26,10 +29,26 @@ class AdminItem {
 
   public function storage($storage) {
     $this->storage = $storage;
+    return $this;
   }
 
   public function title($title) {
     $this->title = $title;
+    return $this;
+  }
+
+  public function data(\Closure $cl) {
+    $this->grid_data = $cl;
+    return $this;
+  }
+
+  public function beforeSave(\Closure $cl) {
+    $this->before_save = $cl;
+    return $this;
+  }
+
+  public function beforeForm(\Closure $cl) {
+    $this->before_form = $cl;
     return $this;
   }
 
